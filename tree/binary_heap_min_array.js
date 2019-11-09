@@ -1,4 +1,4 @@
-class MaxBinaryHeap {
+class MinBinaryHeap {
   constructor() {
     this.data = [];
   }
@@ -18,7 +18,7 @@ class MaxBinaryHeap {
     if (index > 0) {
       let parentIndex = Math.floor((index - 1) / 2);
 
-      if (this.data[index] > this.data[parentIndex]) {
+      if (this.data[index] < this.data[parentIndex]) {
         // swap.
         [this.data[index], this.data[parentIndex]] = [this.data[parentIndex], this.data[index]];
         this.bubbleUp(parentIndex);
@@ -26,11 +26,11 @@ class MaxBinaryHeap {
     }
   }
 
-  getMax() {
+  getMin() {
     if (this.data.length) return this.data[0];
   }
 
-  extractMax() {
+  extractMin() {
     if (this.data.length == 0) {
       return null;
     }
@@ -39,12 +39,12 @@ class MaxBinaryHeap {
       return this.data.pop();
     }
 
-    var max = this.data[0];
+    var min = this.data[0];
     this.data[0] = this.data.pop();
 
     this.bubbleDown(0);
 
-    return max;
+    return min;
   }
 
   // helper function.
@@ -52,30 +52,26 @@ class MaxBinaryHeap {
     if (index < this.data.length - 1) {
       var [child1, child2] = [this.data[2 * index + 1], this.data[2 * index + 2]];
 
-      if ((this.data[index] < child1) && (this.data[index] < child2)) {
+      if ((this.data[index] > child1) && (this.data[index] > child2)) {
         // greater than both children.
         // get the min. and replace with it.
-        if (child1 > child2) {
+        if (child1 < child2) {
           // swap.
           [this.data[2 * index + 1], this.data[index]] = [this.data[index], this.data[2 * index + 1]];
-          this.bubbleDown(2 * index + 1);
-
-        } else if (child2 > child1) {
+          this.bubbleDown(2 * index + 1)
+        } else if (child1 > child2) {
           //swap
           [this.data[2 * index + 2], this.data[index]] = [this.data[index], this.data[2 * index + 2]];
-          this.bubbleDown(2 * index + 2);
-
+          this.bubbleDown(2 * index + 2)
         }
-      } else if (this.data[index] < child1) {
+      } else if (this.data[index] > child1) {
         // swap.
         [this.data[2 * index + 1], this.data[index]] = [this.data[index], this.data[2 * index + 1]];
-        this.bubbleDown(2 * index + 1);
-
-      } else if (this.data[index] < child2) {
+        this.bubbleDown(2 * index + 1)
+      } else if (this.data[index] > child2) {
         //swap
         [this.data[2 * index + 2], this.data[index]] = [this.data[index], this.data[2 * index + 2]];
-        this.bubbleDown(2 * index + 2);
-
+        this.bubbleDown(2 * index + 2)
       }
 
     }
@@ -83,28 +79,49 @@ class MaxBinaryHeap {
 
   sort() {
     while (this.data.length) {
-      console.log(this.extractMax());
+      console.log(this.extractMin());
     }
   }
 
   print() {
     console.log(this.data);
+    console.log('\n\n')
   }
 
 }
 
-var maxBinaryHeap = new MaxBinaryHeap();
-maxBinaryHeap.insert(2);
-maxBinaryHeap.insert(7);
-maxBinaryHeap.insert(26);
-maxBinaryHeap.insert(25);
-maxBinaryHeap.insert(30);
-maxBinaryHeap.insert(50);
-maxBinaryHeap.insert(40);
+var minBinaryHeap = new MinBinaryHeap();
+minBinaryHeap.insert(50);
+// minBinaryHeap.print();
 
-maxBinaryHeap.print();
 
-maxBinaryHeap.sort();
+
+minBinaryHeap.insert(7);
+// minBinaryHeap.print();
+
+minBinaryHeap.insert(26);
+// minBinaryHeap.print();
+
+
+minBinaryHeap.insert(25);
+// minBinaryHeap.print();
+
+
+minBinaryHeap.insert(30);
+// minBinaryHeap.print();
+
+minBinaryHeap.insert(2);
+// minBinaryHeap.print();
+
+minBinaryHeap.insert(40);
+minBinaryHeap.print();
+
+// console.log(minBinaryHeap.extractMin());
+// minBinaryHeap.print();
+
+minBinaryHeap.sort();
+
+
 
 // console.log(maxBinaryHeap.extractMax());
 
