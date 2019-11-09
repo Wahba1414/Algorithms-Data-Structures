@@ -1,4 +1,4 @@
-class BinaryHeap {
+class MaxBinaryHeap {
   constructor() {
     this.data = [];
   }
@@ -77,7 +77,7 @@ class BinaryHeap {
 
 }
 
-var maxBinaryHeap = new BinaryHeap();
+var maxBinaryHeap = new MaxBinaryHeap();
 maxBinaryHeap.insert(2);
 maxBinaryHeap.insert(7);
 maxBinaryHeap.insert(26);
