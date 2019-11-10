@@ -45,4 +45,16 @@ class Stack {
   }
 
 
+  isEmpty() {
+    return this.list.length == 0;
+  }
+
+  clear() {
+    this.list = [];
+  }
+
+  print() {
+    console.log(JSON.stringify(this.list));
+  }
+
 }
