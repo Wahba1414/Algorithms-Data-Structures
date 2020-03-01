@@ -12,33 +12,23 @@ class BinarySearchTree {
   }
 
   // Insert a new value.
+  // Traverse until reach an end and then add a new leaf.
   // Need to check for duplication later. won't do anything. (just ignore)
   insert(value) {
     var newItem = new Node(value);
-
     if (this.root == null) {
       this.root = newItem;
     } else {
       this.insertItem(this.root, newItem);
     }
-
-    return this;
-
+    return this; //Cascading/chaining
   }
-
   // helper functions.
   insertItem(root, newItem) {
-    // console.log('Inside insertItem');
-
     var currentItem = root;
     var value = newItem.data;
-
-    // console.log(`currentItem: ${JSON.stringify(currentItem)}`);
-
     if (currentItem.data > value) {
       // go left.
-      // console.log('go left');
-
       if (currentItem.left == null) {
         currentItem.left = newItem;
       } else {
@@ -47,8 +37,6 @@ class BinarySearchTree {
 
     } else if (currentItem.data < value) {
       // go right.
-      // console.log('go right');
-
       if (currentItem.right == null) {
         currentItem.right = newItem;
       } else {
@@ -57,8 +45,6 @@ class BinarySearchTree {
     }
   }
 
-  // remove an item.
-  // Doesn't cover all cases, will be completed in v2
   remove(value) {
     if (this.root == null) {
       return false;
@@ -69,71 +55,47 @@ class BinarySearchTree {
 
   removeItem(root, value) {
     var currentItem = root;
-
     if (currentItem == null) {
       return false;
     } else if (currentItem.data > value) {
       // go left.
-      console.log('go left');
-
       var retrunedNode = this.removeItem(currentItem.left, value);
-      currentItem.left = retrunedNode;
+      currentItem.left = retrunedNode; //This affects the original object (binaryTree)
       return currentItem;
-
     } else if (currentItem.data < value) {
       // go right.
-      console.log('go right');
       var retrunedNode = this.removeItem(currentItem.right, value);
       currentItem.right = retrunedNode;
-      console.log(`currentItem.right: ${currentItem}`);
       return currentItem;
-
     } else {
-      console.log('Node is found');
       // The value is found.
-      // No children
       if (currentItem.left == null && currentItem.right == null) {
         console.log('No Children');
-
-        currentItem = null;
+        currentItem = null; //doesn't affect the original object (binaryTree)
         return currentItem;
-
       } else if (currentItem.left == null) {  // one child
         console.log('One Children');
-
         currentItem = currentItem.right;
         return currentItem;
-
       } else if (currentItem.right == null) { // one child
         console.log('One Children');
-
         currentItem = currentItem.left;
         return currentItem;
-
       } else { //two children.
         console.log('Two Children');
-
         var results = this.getMinNode(currentItem.right, currentItem);
         var minNode = results.node;
-
-        // console.log(`minNode: ${JSON.stringify(minNode)}`);
-
-        // console.log('before swap');
-        // console.log(`currentItem: ${JSON.stringify(currentItem)}`);
-        // console.log(`minNode: ${JSON.stringify(minNode)}`);
-
-
-        this.swapTwoNodes(currentItem, minNode);
-
-        // console.log('after swap');
-        // console.log(`currentItem: ${JSON.stringify(currentItem)}`);
-        // console.log(`minNode: ${JSON.stringify(minNode)}`);
-        results.parent.left = null;
+        if (currentItem.right == minNode) {
+          this.swapTwoNodes(currentItem, minNode);
+          currentItem.right = minNode.right;
+        } else {
+          console.log(`Nearst right node is not the minimum one`);
+          this.swapTwoNodes(currentItem, minNode);
+          results.parent.left = null;
+        }
         return currentItem;
       }
-
     }
-
   }
 
 
@@ -180,6 +142,7 @@ class BinarySearchTree {
     }
   }
 
+  // Traverse and get the data out sorted.
   inOrder(node) {
     if (node != null) {
       this.inOrder(node.left);
@@ -188,6 +151,18 @@ class BinarySearchTree {
     }
   }
 
+  inOrderDescending(node) {
+    if (node != null) {
+      this.inOrderDescending(node.right);
+      console.log(node.data);
+      this.inOrderDescending(node.left);
+    }
+  }
+  /*
+    Works as follows:
+    First, print any touched node, second, go left as possible and then go back by traversing right before go up.
+    Hint: Keep this implementation in front of your eyes to traverse correctly.
+  */
   preOrder(node) {
     if (node != null) {
       console.log(node.data);
@@ -195,7 +170,12 @@ class BinarySearchTree {
       this.preOrder(node.right);
     }
   }
-
+  /*
+    Works as follows:
+    First, go left as possible, then print this node, before go up, go right and repaet the first step.
+    Hint: only print a node when all its children are printed.
+    Hint: Keep this implementation in front of your eyes to traverse correctly.
+  */
   postOrder(node) {
     if (node != null) {
       this.postOrder(node.left);
@@ -203,35 +183,42 @@ class BinarySearchTree {
       console.log(node.data);
     }
   }
-
 }
 
 // testing.
 binaryTree = new BinarySearchTree();
-binaryTree.insert(2);
-binaryTree.insert(4);
-binaryTree.insert(7);
-binaryTree.insert(20);
-binaryTree.insert(5);
-binaryTree.insert(22);
-binaryTree.insert(15);
-binaryTree.insert(17);
-binaryTree.insert(13);
+binaryTree.insert(100);
+binaryTree.insert(150);
+binaryTree.insert(200);
+binaryTree.insert(160);
+binaryTree.insert(210);
+binaryTree.insert(300);
+binaryTree.insert(30);
+binaryTree.insert(40);
+binaryTree.insert(10);
+binaryTree.insert(45);
+binaryTree.insert(42);
+binaryTree.insert(205);
+binaryTree.insert(35);
+binaryTree.insert(32);
 
 
-// binaryTree.remove(7);
+binaryTree.remove(100);
 // console.log(binaryTree.root);
-binaryTree.inOrder(binaryTree.root);
-var results = binaryTree.search(binaryTree.root, 17);
-console.log(`results: ${results.data}`);
-binaryTree.remove(17);
-var results = binaryTree.search(binaryTree.root, 17);
-console.log(`results: ${results.data}`);
+// binaryTree.inOrder(binaryTree.root);
+// var results = binaryTree.search(binaryTree.root, 17);
+// console.log(`results: ${results.data}`);
+// binaryTree.remove(17);
+// var results = binaryTree.search(binaryTree.root, 17);
+// console.log(`results: ${results.data}`);
 
 // console.log('\n\n');
-// binaryTree.preOrder(binaryTree.root);
+// binaryTree.inOrderDescending(binaryTree.root);
+
+// console.log('\n\n');
+binaryTree.preOrder(binaryTree.root);
 // binaryTree.remove(7);
 // binaryTree.inOrder(binaryTree.root);
 
-// console.log('\n\n');
+console.log('\n\n');
 // binaryTree.postOrder(binaryTree.root);

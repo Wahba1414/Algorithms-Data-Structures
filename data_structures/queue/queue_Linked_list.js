@@ -12,10 +12,12 @@ class Queue {
     this.length = 0;
   }
 
+  //O(1)
   peek() {
     return this.first.data;
   }
 
+  // O(1)
   enqueue(value) {
     var newItem = new Node(value);
 
@@ -29,9 +31,7 @@ class Queue {
     this.length++;
     return this;
   }
-
-
-
+  // O(1)
   dequeue() {
     if (!this.length) {
       return null;

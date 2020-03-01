@@ -12,10 +12,12 @@ class Stack {
     this.length = 0;
   }
 
+  //O(1)
   peek() {
     return this.top;
   }
 
+  //O(1)
   push(value) {
     var newItem = new Node(value);
 
@@ -29,9 +31,7 @@ class Stack {
     this.length++;
     return this;
   }
-
-
-
+  //O(1)
   pop() {
     if (!this.length) {
       return null;
