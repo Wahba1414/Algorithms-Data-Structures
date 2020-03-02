@@ -1,13 +1,20 @@
-module.exports = class MaxBinaryHeap {
+class Node {
+  constructor(value, priority) {
+    this.value = value;
+    this.priority = priority;
+  }
+}
+
+class MaxBinaryHeap {
   constructor() {
     this.data = [];
   }
   //O(log(n))
-  insert(value) {
+  insert(value, priority = 1) {
     if (this.data.length == 0) {
-      this.data.push(value);
+      this.data.push(new Node(value, priority));
     } else {
-      this.data.push(value);
+      this.data.push(new Node(value, priority));
       this.bubbleUp(this.data.length - 1);
     }
   }
@@ -19,7 +26,7 @@ module.exports = class MaxBinaryHeap {
     if (index > 0) {
       //the equation to get the parent for some index in the array.
       let parentIndex = Math.floor((index - 1) / 2);
-      if (this.data[index] > this.data[parentIndex]) {
+      if (this.data[index].priority > this.data[parentIndex].priority) {
         // swap.
         [this.data[index], this.data[parentIndex]] = [this.data[parentIndex], this.data[index]];
         this.bubbleUp(parentIndex);
@@ -57,21 +64,28 @@ module.exports = class MaxBinaryHeap {
     if (index < this.data.length - 1) {
       // Equations to get children indexes for some parent (array index).
       var [child1, child2] = [this.data[2 * index + 1], this.data[2 * index + 2]];
-      if ((this.data[index] < child1) && (this.data[index] < child2)) {
-        if (child1 > child2) {
+
+      // console.log(`child1: ${JSON.stringify(child1)}`)
+      // console.log(`child2: ${JSON.stringify(child2)}`)
+      // console.log(`this.data[index]: ${JSON.stringify(this.data[index])}`)
+
+      if ((child1 && child2) && (this.data[index].priority < child1.priority) && (this.data[index].priority < child2.priority)) {
+
+        if (child1.priority > child2.priority) {
           // swap.
           [this.data[2 * index + 1], this.data[index]] = [this.data[index], this.data[2 * index + 1]];
           this.bubbleDown(2 * index + 1);
-        } else if (child2 > child1) {
+        } else if (child2.priority > child1.priority) {
           //swap
           [this.data[2 * index + 2], this.data[index]] = [this.data[index], this.data[2 * index + 2]];
           this.bubbleDown(2 * index + 2);
         }
-      } else if (this.data[index] < child1) {
+
+      } else if ( child1 && this.data[index].priority < child1.priority) {
         // swap.
         [this.data[2 * index + 1], this.data[index]] = [this.data[index], this.data[2 * index + 1]];
         this.bubbleDown(2 * index + 1);
-      } else if (this.data[index] < child2) {
+      } else if (child2 && this.data[index].priority < child2.priority) {
         //swap
         [this.data[2 * index + 2], this.data[index]] = [this.data[index], this.data[2 * index + 2]];
         this.bubbleDown(2 * index + 2);
@@ -94,13 +108,13 @@ module.exports = class MaxBinaryHeap {
 }
 
 var maxBinaryHeap = new MaxBinaryHeap();
-maxBinaryHeap.insert(2);
-maxBinaryHeap.insert(7);
-maxBinaryHeap.insert(26);
-maxBinaryHeap.insert(25);
-maxBinaryHeap.insert(30);
-maxBinaryHeap.insert(50);
-maxBinaryHeap.insert(40);
+maxBinaryHeap.insert(2, 2);
+maxBinaryHeap.insert(7, 7);
+maxBinaryHeap.insert(26, 26);
+maxBinaryHeap.insert(25, 25);
+maxBinaryHeap.insert(30, 30);
+maxBinaryHeap.insert(50, 50);
+maxBinaryHeap.insert(40, 40);
 
 maxBinaryHeap.print();
 
@@ -137,3 +151,5 @@ maxBinaryHeap.sort();
 // console.log(maxBinaryHeap.extractMax());
 
 // maxBinaryHeap.print();
+
+module.exports = MaxBinaryHeap;
