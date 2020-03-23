@@ -11,18 +11,20 @@ function insertionSort(list) {
 
         list.unshift(list.splice(i, 1)[0]);
 
-      } else if ((elemToInsert <= list[j]) &&
+      } else if ((elemToInsert < list[j]) &&
         (elemToInsert >= list[j - 1])) {
         // Insert.
         list.splice(j, 0, list.splice(i, 1)[0]);
         break;
       }
     }
-    console.log(`inprogress: ${JSON.stringify(list)}`);
+    // console.log(`inprogress: ${JSON.stringify(list)}`);
   }
 }
 
-var list = [10, 2, 5, 4, 8, 12, 9, 20, 12, 40, 34, 32, 50];
+// var list = [10, 2, 5, 4, 8, 12, 9, 20, 12, 40, 34, 32, 50];
+var list = [1, 1, 2, 2, 3, 3, 5, 5, 7, 7, 9, 9];
+
 // var list = [10, 2, 5, 4, 8, 12];
 console.log(`Start: ${JSON.stringify(list)}`);
 
