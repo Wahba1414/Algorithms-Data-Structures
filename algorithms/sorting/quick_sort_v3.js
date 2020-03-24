@@ -34,12 +34,12 @@ function arrangeListByPivot(list, start, end, pivotIndex) {
 
 // var list = [10, 2, 5, 4, 8, 12, 9, 20, 12, 40, 34, 32, 50];
 
-const list = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
+// const list = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
 
 // var list = [10, 2, 5, 4, 8, 12, 9, 20, 40, 34, 32, 50];
 
 // var list = [10, 2, 5, 4, 8, 12];
 
-console.log(quickSort(list, 0, list.length - 1));
+// console.log(quickSort(list, 0, list.length - 1));
 
 module.exports = quickSort;
