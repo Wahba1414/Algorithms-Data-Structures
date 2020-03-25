@@ -3,6 +3,8 @@ function quickSort(list, start, end) {
   var pivotIndex = end;
   // Arrange the list according to this pivot.
   pivotIndex = arrangeListByPivot(list, start, end, pivotIndex);
+
+  // console.log(`array: ${list}`)
   // do recursion on the right & left sub lists or just return if the length is <= 2
   if ((end - start + 1) <= 2) return;
 
@@ -22,8 +24,11 @@ function arrangeListByPivot(list, start, end, pivotIndex) {
       // do two swaps.
       if ((pivotIndex - i) != 1) {
         [list[pivotIndex], list[pivotIndex - 1]] = [list[pivotIndex - 1], list[pivotIndex]];
+        // console.log('swap');
       }
       [list[pivotIndex], list[i]] = [list[i], list[pivotIndex]];
+      // console.log('swap');
+
       // The new index for the pivot
       pivotIndex--;
     }
@@ -40,6 +45,8 @@ function arrangeListByPivot(list, start, end, pivotIndex) {
 
 // var list = [10, 2, 5, 4, 8, 12];
 
-// console.log(quickSort(list, 0, list.length - 1));
+var list = [7, 15, 12, 3];
+
+console.log(quickSort(list, 0, list.length - 1));
 
 module.exports = quickSort;
