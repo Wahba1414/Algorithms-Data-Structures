@@ -183,27 +183,90 @@ class BinarySearchTree {
       console.log(node.data);
     }
   }
+
+  convertTreeToLevels(node, levelsData, level) {
+    if (node != null) {
+      // console.log(`Level No. : ${levelCounter}`);
+
+      if (levelsData[level]) {
+        levelsData[level].push(node.data);
+      } else {
+        console.log(`level: ${level} - node.data: ${node.data}`);
+        levelsData[level] = [node.data];
+      }
+
+
+      if (node.left != null) this.BFS(node.left, levelsData, level + 1);
+      if (node.right != null) this.BFS(node.right, levelsData, level + 1);
+
+    }
+  }
+
+  // Traverse nodes level by level.
+  // Time complexity = O(N)
+  // Space complexity= O(N)
+  // Recursive.
+  BFSRecursive(levelNodes) {
+
+    if (levelNodes.length) {
+
+      var data = levelNodes.map(node => node.data);
+
+      console.log(data.join(' '));
+
+      var newLevelNodes = [];
+
+      levelNodes.forEach(function (node) {
+        if (node.left != null) newLevelNodes.push(node.left);
+        if (node.right != null) newLevelNodes.push(node.right);
+      });
+
+      this.BFS(newLevelNodes);
+
+    }
+  }
+
+  
+  // With Queue (Traverse).
+  BFS() {
+    if (this.root) {
+      // Used a normal array instead of Queue here for just simplicty.
+      var queue = [this.root];
+      var currentNode;
+    }
+
+    while (queue.length) {
+      currentNode = queue.shift();
+      console.log(currentNode.data);
+
+      if (currentNode.left) queue.push(currentNode.left);
+      if (currentNode.right) queue.push(currentNode.right);
+
+    }
+
+  }
+
 }
 
 // testing.
-binaryTree = new BinarySearchTree();
-binaryTree.insert(100);
-binaryTree.insert(150);
-binaryTree.insert(200);
-binaryTree.insert(160);
-binaryTree.insert(210);
-binaryTree.insert(300);
-binaryTree.insert(30);
-binaryTree.insert(40);
-binaryTree.insert(10);
-binaryTree.insert(45);
-binaryTree.insert(42);
-binaryTree.insert(205);
-binaryTree.insert(35);
-binaryTree.insert(32);
+tree = new BinarySearchTree();
+// binaryTree.insert(100);
+// binaryTree.insert(150);
+// binaryTree.insert(200);
+// binaryTree.insert(160);
+// binaryTree.insert(210);
+// binaryTree.insert(300);
+// binaryTree.insert(30);
+// binaryTree.insert(40);
+// binaryTree.insert(10);
+// binaryTree.insert(45);
+// binaryTree.insert(42);
+// binaryTree.insert(205);
+// binaryTree.insert(35);
+// binaryTree.insert(32);
 
 
-binaryTree.remove(100);
+// binaryTree.remove(100);
 // console.log(binaryTree.root);
 // binaryTree.inOrder(binaryTree.root);
 // var results = binaryTree.search(binaryTree.root, 17);
@@ -216,9 +279,29 @@ binaryTree.remove(100);
 // binaryTree.inOrderDescending(binaryTree.root);
 
 // console.log('\n\n');
-binaryTree.preOrder(binaryTree.root);
+// binaryTree.preOrder(binaryTree.root);
 // binaryTree.remove(7);
 // binaryTree.inOrder(binaryTree.root);
 
-console.log('\n\n');
+// console.log('\n\n');
 // binaryTree.postOrder(binaryTree.root);
+
+tree.insert(9)
+tree.insert(4)
+tree.insert(6)
+tree.insert(20)
+tree.insert(170)
+tree.insert(15)
+tree.insert(1)
+
+// var results = {};
+
+// tree.convertTreeToLevels(tree.root, results, 1);
+
+// console.log(results)
+// Object.keys(results).forEach(key => {
+//   console.log(results[key].join(' '));
+// });
+
+// tree.BFS([tree.root]);
+tree.BFS();
