@@ -164,5 +164,5 @@ graph.createBiDirectionEdge('F', 'E', 1);
 
 
 // Note: need to clone here due to 'touched' field.
-graph.BFS_Recursive([graph.root]);
+// graph.BFS_Recursive([graph.root]);
 // graph.DFS_Recursive(graph.root);
