@@ -1,18 +1,21 @@
-function waysToReturnChange(denominations, numOfCoins, amount) {
+function getWays(n, c, index, cache) {
+  cache = cache || {};
 
-  if (amount === 0) return 1; // Perfect!
+  if ((n + '_' + c[index]) in cache) {
+    return cache[n + '_' + c[index]];
+  }
 
-  if (amount < 0) return 0; // No solution exists for negative amount
+  if (n == 0)
+    return 1;
 
-  if (numOfCoins < 0 && amount > 0) return 0; // We don't have coins left!
+  if (index < 0 || n < 0)
+    return 0;
 
-  // console.log('checking ways to make ' + amount + ' with ' + denominations.slice(numOfCoins));
-
-  return waysToReturnChange(denominations, numOfCoins, amount - denominations[numOfCoins]) +
-    waysToReturnChange(denominations, numOfCoins - 1, amount);
+  return cache[n + '_' + c[index]] = getWays(n - c[index], c, index, cache) +
+    getWays(n, c, index - 1, cache);
 }
 
-var denominations = [1, 2, 3];
-var amount = 4;
-var ways = waysToReturnChange(denominations, denominations.length - 1, amount);
-console.log(`ways: ${ways}`);
+var n = 10000;
+var c = [2, 5, 3, 6 , 9, 10, 20, 30,22,40];
+
+console.log(`# of ways: ${getWays(n, c, c.length - 1)}`);
