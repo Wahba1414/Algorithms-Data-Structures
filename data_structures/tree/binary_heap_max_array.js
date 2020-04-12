@@ -1,4 +1,4 @@
-module.exports = class MaxBinaryHeap {
+var MaxBinaryHeap = class MaxBinaryHeap {
   constructor() {
     this.data = [];
   }
@@ -62,7 +62,7 @@ module.exports = class MaxBinaryHeap {
           // swap.
           [this.data[2 * index + 1], this.data[index]] = [this.data[index], this.data[2 * index + 1]];
           this.bubbleDown(2 * index + 1);
-        } else if (child2 > child1) {
+        } else if (child2 >= child1) {
           //swap
           [this.data[2 * index + 2], this.data[index]] = [this.data[index], this.data[2 * index + 2]];
           this.bubbleDown(2 * index + 2);
@@ -87,24 +87,40 @@ module.exports = class MaxBinaryHeap {
     }
   }
 
+  isEmpty() {
+    return this.data.length == 0;
+  }
+
   print() {
     console.log(this.data);
   }
 
 }
 
+module.exports = MaxBinaryHeap;
+
+
 var maxBinaryHeap = new MaxBinaryHeap();
 maxBinaryHeap.insert(2);
-maxBinaryHeap.insert(7);
-maxBinaryHeap.insert(26);
-maxBinaryHeap.insert(25);
-maxBinaryHeap.insert(30);
-maxBinaryHeap.insert(50);
-maxBinaryHeap.insert(40);
-
-maxBinaryHeap.print();
+maxBinaryHeap.insert(6);
+maxBinaryHeap.insert(6);
+maxBinaryHeap.insert(9);
+maxBinaryHeap.insert(4);
+maxBinaryHeap.insert(3);
 
 maxBinaryHeap.sort();
+// maxBinaryHeap.insert(2);
+// maxBinaryHeap.insert(7);
+// maxBinaryHeap.insert(26);
+// maxBinaryHeap.insert(25);
+// maxBinaryHeap.insert(30);
+// maxBinaryHeap.insert(50);
+// maxBinaryHeap.insert(40);
+
+// maxBinaryHeap.print();
+
+// maxBinaryHeap.sort();
+
 
 // console.log(maxBinaryHeap.extractMax());
 
