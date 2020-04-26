@@ -9,6 +9,7 @@ class MaxBinaryHeap {
   constructor() {
     this.data = [];
   }
+  
   //O(log(n))
   insert(value, priority = 1) {
     if (this.data.length == 0) {

@@ -10,13 +10,19 @@ function quickSelect(list, start, end, k) {
   }
 
   if (pivotIndex == k) {
+
     return list[pivotIndex];
+
   } else if (pivotIndex > k) {
+
     // go left.
     return quickSelect(list, 0, pivotIndex - 1, k);
+
   } else {
+
     // go right
     return quickSelect(list, pivotIndex + 1, end, k);
+
   }
 
 }
@@ -26,18 +32,27 @@ function quickSelect(list, start, end, k) {
 
 // This function arranges the list according to the pivot and finally returns the new index of this pivot.
 function arrangeListByPivot(list, start, end, pivotIndex) {
+
   for (let i = end - 1; i >= start; i--) {
+
     if (list[i] > list[pivotIndex]) {
+      
       // do two swaps.
       if ((pivotIndex - i) != 1) {
         [list[pivotIndex], list[pivotIndex - 1]] = [list[pivotIndex - 1], list[pivotIndex]];
       }
+
       [list[pivotIndex], list[i]] = [list[i], list[pivotIndex]];
+
       // The new index for the pivot
       pivotIndex--;
+
     }
+
   }
+
   return pivotIndex;
+
 }
 
 // var list = [0, 1, 2, 4, 6, 5, 3];

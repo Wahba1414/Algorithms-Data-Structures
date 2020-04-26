@@ -13,6 +13,7 @@ class TrieNode {
 }
 
 class Trie {
+
   constructor() {
     this.root = new TrieNode(null); //Used to as a start only.
   }
@@ -21,32 +22,42 @@ class Trie {
   insert(word) {
     var currentNode = this.root;
     var wordList = word.split('');
+
     // iterating on all word characters.
     for (let i = 0; i < wordList.length; i++) {
+
       if (!currentNode.children[wordList[i]]) {
         currentNode.children[wordList[i]] = new TrieNode(wordList[i], currentNode);
       }
+
       // Need to go for the next char in the word.
       currentNode = currentNode.children[wordList[i]];
+
       if (i == wordList.length - 1) {
         currentNode.isEnd = true;
       }
+
     }
+
     return this;
   }
+
   // O(M), is this a whole word in the trie.
   contains(word) {
     var currentNode = this.root;
     var wordList = word.split('');
 
     for (let i = 0; i < wordList.length; i++) {
+
       if (currentNode.children[wordList[i]]) {
         // the word may be exist, lets continue.
         currentNode = currentNode.children[wordList[i]];
       } else {
         return false; //not found
       }
+
     }
+
     return true; //exist
   }
 
@@ -55,6 +66,7 @@ class Trie {
     var currentNode = this.root;
     var words = [];
     var prefixList = prefix.split('');
+
     for (let i = 0; i < prefixList.length; i++) {
 
       if (currentNode.children[prefixList[i]]) {
@@ -64,9 +76,11 @@ class Trie {
         return words;
       }
     }
+
     // get all words for this prefix.
     this.getAllWords(currentNode, words);
     return words;
+
   }
 
   // O(M)
@@ -96,7 +110,9 @@ class Trie {
   removeWord(word) {
     var currentNode = this.root;
     var wordList = word.split('');
+
     for (let i = 0; i < wordList.length; i++) {
+
       if (currentNode.children[wordList[i]]) {
         // the word may be exist, lets continue.
         currentNode = currentNode.children[wordList[i]];
@@ -108,6 +124,7 @@ class Trie {
       } else {
         return false; //not found
       }
+
     }
 
     return true; //exist

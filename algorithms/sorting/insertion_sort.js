@@ -11,13 +11,15 @@ function insertionSort(list) {
 
         list.unshift(list.splice(i, 1)[0]);
 
-      } else if ((elemToInsert < list[j]) &&
-        (elemToInsert >= list[j - 1])) {
+      } else if ((elemToInsert < list[j]) && (elemToInsert >= list[j - 1])) {
+
         // Note: it is just '<' not '<=' to handle the repeated values and avoid unneeded shifts.
         // Insert.
         list.splice(j, 0, list.splice(i, 1)[0]);
         break;
+
       }
+
     }
     // console.log(`inprogress: ${JSON.stringify(list)}`);
   }

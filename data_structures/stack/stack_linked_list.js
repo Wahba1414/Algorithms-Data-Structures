@@ -6,11 +6,12 @@ class Node {
 }
 
 class Stack {
+
   constructor() {
     this.top = null;
-    this.bottom = null;
     this.length = 0;
   }
+
 
   //O(1)
   peek() {
@@ -22,15 +23,16 @@ class Stack {
     var newItem = new Node(value);
 
     if (!this.length) {
-      this.top = this.bottom = newItem;
+      this.top = newItem;
     } else {
       newItem.next = this.top;
       this.top = newItem;
     }
 
     this.length++;
-    return this;
+    return this; //to enable chanining.
   }
+
   //O(1)
   pop() {
     if (!this.length) {
@@ -39,7 +41,7 @@ class Stack {
 
     if (this.length == 1) {
       let poppedItem = this.top;
-      this.top = this.bottom = null;
+      this.top = null;
       this.length--;
       return poppedItem;
     }

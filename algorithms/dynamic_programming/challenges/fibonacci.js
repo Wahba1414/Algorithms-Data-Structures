@@ -9,6 +9,7 @@ function fibonacciNormal(index) {
   } else {
     return fibonacciNormal(index - 1) + fibonacciNormal(index - 2);
   }
+  
 }
 
 

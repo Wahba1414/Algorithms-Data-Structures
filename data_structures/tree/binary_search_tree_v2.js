@@ -16,17 +16,21 @@ class BinarySearchTree {
   // Need to check for duplication later. won't do anything. (just ignore)
   insert(value) {
     var newItem = new Node(value);
+
     if (this.root == null) {
       this.root = newItem;
     } else {
       this.insertItem(this.root, newItem);
     }
+
     return this; //Cascading/chaining
   }
-  // helper functions.
+
+  // helper functions. Recursive
   insertItem(root, newItem) {
     var currentItem = root;
     var value = newItem.data;
+
     if (currentItem.data > value) {
       // go left.
       if (currentItem.left == null) {
@@ -43,6 +47,7 @@ class BinarySearchTree {
         this.insertItem(currentItem.right, newItem);
       }
     }
+
   }
 
   remove(value) {
@@ -55,36 +60,50 @@ class BinarySearchTree {
 
   removeItem(root, value) {
     var currentItem = root;
+
     if (currentItem == null) {
-      return false;
+      return null;
     } else if (currentItem.data > value) {
+
       // go left.
       var retrunedNode = this.removeItem(currentItem.left, value);
       currentItem.left = retrunedNode; //This affects the original object (binaryTree)
       return currentItem;
+
     } else if (currentItem.data < value) {
+
       // go right.
       var retrunedNode = this.removeItem(currentItem.right, value);
       currentItem.right = retrunedNode;
       return currentItem;
+
     } else {
+
       // The value is found.
       if (currentItem.left == null && currentItem.right == null) {
+
         console.log('No Children');
         currentItem = null; //doesn't affect the original object (binaryTree)
         return currentItem;
+
       } else if (currentItem.left == null) {  // one child
+
         console.log('One Children');
         currentItem = currentItem.right;
         return currentItem;
+
       } else if (currentItem.right == null) { // one child
+
         console.log('One Children');
         currentItem = currentItem.left;
         return currentItem;
+
       } else { //two children.
+
         console.log('Two Children');
         var results = this.getMinNode(currentItem.right, currentItem);
         var minNode = results.node;
+
         if (currentItem.right == minNode) {
           this.swapTwoNodes(currentItem, minNode);
           currentItem.right = minNode.right;
@@ -93,23 +112,22 @@ class BinarySearchTree {
           this.swapTwoNodes(currentItem, minNode);
           results.parent.left = null;
         }
+
         return currentItem;
+
       }
     }
   }
 
-
   // helper functions.
-  getMinNode(root, parent) {
-    // console.log(`getMinNode root: ${JSON.stringify(root)}`);
-
-    if (root.left != null) {
-      return this.getMinNode(root.left, root);
+  getMinNode(vertex, parent) {
+    if (vertex.left != null) {
+      return this.getMinNode(vertex.left, vertex);
       // return minNode;
     } else {
       return {
         parent,
-        node: root
+        node: vertex
       };
     }
   }
@@ -122,27 +140,32 @@ class BinarySearchTree {
     return this.root;
   }
 
-
+  //O(Log(N): in case of the BST is balanced or one of self-balanced BST like red-black one ---> O(N)) 
   search(root, value) {
     if (root == null) {
       return false;
     } else {
       if (value > root.data) {
+
         // go right.
         return this.search(root.right, value);
 
       } else if (value < root.data) {
+
         // go left.
         return this.search(root.left, value);
 
       } else {
+
         // found
         return root;
+
       }
     }
   }
 
-  // Traverse and get the data out sorted.
+  // Traverse and get the data out sorted. (ascending)
+  // O(N)
   inOrder(node) {
     if (node != null) {
       this.inOrder(node.left);
@@ -172,7 +195,7 @@ class BinarySearchTree {
   }
   /*
     Works as follows:
-    First, go left as possible, then print this node, before go up, go right and repaet the first step.
+    First, go left as possible, then print this node, before go up, go right and repeat the first step.
     Hint: only print a node when all its children are printed.
     Hint: Keep this implementation in front of your eyes to traverse correctly.
   */
@@ -221,12 +244,13 @@ class BinarySearchTree {
         if (node.right != null) newLevelNodes.push(node.right);
       });
 
-      this.BFS(newLevelNodes);
+      this.BFSRecursive(newLevelNodes);
 
     }
+
   }
 
-  
+
   // With Queue (Traverse).
   BFS() {
     if (this.root) {

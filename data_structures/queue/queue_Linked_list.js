@@ -6,6 +6,7 @@ class Node {
 }
 
 class Queue {
+
   constructor() {
     this.first = null;
     this.last = null;
@@ -31,6 +32,7 @@ class Queue {
     this.length++;
     return this;
   }
+  
   // O(1)
   dequeue() {
     if (!this.length) {

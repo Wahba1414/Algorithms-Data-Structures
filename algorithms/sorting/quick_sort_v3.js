@@ -15,24 +15,29 @@ function quickSort(list, start, end) {
 }
 
 // Helper functions.
-
-
 // This function arranges the list according to the pivot and finally returns the new index of this pivot.
 function arrangeListByPivot(list, start, end, pivotIndex) {
+
   for (let i = end - 1; i >= start; i--) {
+
     if (list[i] > list[pivotIndex]) {
+
       // do two swaps.
       if ((pivotIndex - i) != 1) {
         [list[pivotIndex], list[pivotIndex - 1]] = [list[pivotIndex - 1], list[pivotIndex]];
         // console.log('swap');
       }
+
       [list[pivotIndex], list[i]] = [list[i], list[pivotIndex]];
       // console.log('swap');
 
       // The new index for the pivot
       pivotIndex--;
+
     }
+
   }
+
   return pivotIndex;
 }
 

@@ -80,14 +80,19 @@ class Graph {
 
   // Graph.
   DFS_Recursive(vertex) {
+
     if (this.nodes[vertex] && (!this.nodes[vertex].touched)) {
+
       console.log(vertex);
+      // Need to clone before applying this modification.
       this.nodes[vertex].touched = true;
 
       Object.keys(this.nodes[vertex]).forEach((vertex) => {
         this.DFS_Recursive(vertex);
       });
+
     }
+
   }
 
 
