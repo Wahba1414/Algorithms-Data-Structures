@@ -3,7 +3,7 @@ var moveZeroes = function (nums) {
 
   var i = 0
   while (i < length) {
-
+    
     // console.log(`i: ${i} - ${nums[i]} - nums (before): ${nums}`)
     if (nums[i] == 0) {
       nums.splice(i, 1);
@@ -12,6 +12,7 @@ var moveZeroes = function (nums) {
     } else {
       i++;
     }
+
   }
 
 };

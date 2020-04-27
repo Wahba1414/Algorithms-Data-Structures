@@ -18,13 +18,14 @@ var countElements = function (arr) {
 
     tracking[arr[i]] = tracking[arr[i]] || 0;
     tracking[arr[i]]++;
+
   }
 
   return count;
 };
 
-var arr = [1,3,2,3,5,0];
+var arr = [1, 3, 2, 3, 5, 0];
 // var arr = [1, 2, 3];
-var arr = [1,1,2,2];
+// var arr = [1, 1, 2, 2];
 
 console.log(`output: ${countElements(arr)}`);

@@ -110,9 +110,6 @@ var isValid = function (s) {
     return false;
   }
 
-  // clear stack for the next check.
-  stack.clear();
-
 }
 
 var s = `{[()]}

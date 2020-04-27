@@ -6,11 +6,12 @@ var groupAnagrams = function (strs) {
   var anagrams = {};
 
   strs.forEach(function (str) {
+    // Sort it and use the result as a key.
     let sortedStr = str.split('').sort().join('');
+
     anagrams[sortedStr] = anagrams[sortedStr] || [];
     anagrams[sortedStr].push(str);
 
-    // console.log(`anagrams: ${JSON.stringify(anagrams)}`);
   });
 
   var result = [];

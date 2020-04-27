@@ -2,6 +2,7 @@
  * @param {number[]} nums
  * @return {number[]}
  */
+
 // Won't work if there is a zero in nums.
 var productExceptSelf = function (nums) {
   var total = 1;

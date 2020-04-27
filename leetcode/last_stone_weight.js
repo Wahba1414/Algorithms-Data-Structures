@@ -11,23 +11,23 @@ var lastStoneWeight = function (stones) {
     heap.insert(stone);
   });
 
-  heap.sort();
-  // while (!heap.isEmpty()) {
-  //   console.log('new iteration');
+  // heap.sort();
+  while (!heap.isEmpty()) {
+    console.log('new iteration');
 
-  //   let firstMax = heap.extractMax();
-  //   let secondMax = heap.extractMax();
+    let firstMax = heap.extractMax();
+    let secondMax = heap.extractMax();
 
-  //   console.log(firstMax, secondMax);
-  //   console.log('\n')
+    console.log(firstMax, secondMax);
+    console.log('\n')
 
-  //   if (secondMax == null) return firstMax;
+    if (secondMax == null) return firstMax;
 
-  //   if (secondMax < firstMax) {
-  //     heap.insert(firstMax - secondMax);
-  //   }
+    if (secondMax < firstMax) {
+      heap.insert(firstMax - secondMax);
+    }
 
-  // }
+  }
 
   // if there is no items left.
   return 0;

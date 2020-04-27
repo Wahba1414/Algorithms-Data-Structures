@@ -9,6 +9,7 @@ var lengthOfLongestSubstring = function (s) {
   var subString = [s[0]];
 
   for (let i = 1; i < s.length; i++) {
+
     if (subString.includes(s[i])) {
       if (subString.length > maxLen) maxLen = subString.length;
       subString.splice(0, subString.indexOf(s[i]) + 1);

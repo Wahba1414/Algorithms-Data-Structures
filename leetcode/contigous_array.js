@@ -18,6 +18,7 @@ var findMaxLength = function (nums) {
     } else {
       tracking[counter] = index;
     }
+    
   });
 
   return maxLen;
