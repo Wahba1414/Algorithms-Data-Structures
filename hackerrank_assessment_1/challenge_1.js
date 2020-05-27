@@ -4,7 +4,7 @@
  * 
  * @param {Number} level 
  * @param {String} sep 
- */
+ */ 
 function joinedLogger(level, sep) {
   return function (...msgs) {
     var finalMessage = '';
